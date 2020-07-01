@@ -61,6 +61,13 @@ spec:
               value: ""
             - name: LOG_LEVEL
               value: {{ .Values.logLevel | quote }}
+            - name: redirectUri
+             value: "https://c100-e.eu-gb.containers.cloud.ibm.com:{{ .Values.image.port }}/ibm/cloud/appid/callback" 
+           - name: APPID_SERVICE_BINDING
+             valueFrom:
+               secretKeyRef:
+                 name: binding-sandbox-ocp431-one-appid 
+                 key: binding
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
